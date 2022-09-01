@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>OTHomeprovisioningtask.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">HomeAdapter</a> &gt; <a href="index.source.html" class="el_package">hn.com.tigo.josm.orchestrator.home.adapter.task</a> &gt; <span class="el_source">OTHomeprovisioningtask.java</span></div><h1>OTHomeprovisioningtask.java</h1><pre class="source lang-java linenums">package hn.com.tigo.josm.orchestrator.home.adapter.task;
+
+import javax.ejb.EJB;
+import javax.ejb.Stateless;
+import javax.jws.WebService;
+
+import org.apache.log4j.Logger;
+
+
+import hn.com.tigo.josm.common.adapter.AbstractAdapter;
+import hn.com.tigo.josm.common.adapter.AdapterValidationType;
+import hn.com.tigo.josm.common.adapter.dto.TaskRequestType;
+import hn.com.tigo.josm.common.adapter.dto.TaskResponseType;
+import hn.com.tigo.josm.common.adapter.task.AbstractTask;
+import hn.com.tigo.josm.common.adapter.task.Task;
+import hn.com.tigo.josm.common.exceptions.AdapterException;
+import hn.com.tigo.josm.orchestrator.driver.home.core.HomeDriver;
+import hn.com.tigo.josm.orchestrator.driver.home.operation.OTHomeProvisioningTaskOperations;
+import hn.com.tigo.josm.orchestrator.home.adapter.core.HomeAdapter;
+import hn.com.tigo.josm.orchestrator.home.adapter.utils.HomeAdapterConstants;
+
+/**
+ * The Class OTHomeprovisioningtask is used to execute the method
+ * OTHomeprovisioningtask (HomeDriver)
+ * 
+ * @author Laurent G. Caceres
+ * @version 1.0.0
+ * @since 17/08/2022
+ */
+@WebService
+@Stateless(mappedName = &quot;OTHomeprovisioningtask&quot;)
+<span class="fc" id="L32">public class OTHomeprovisioningtask extends AbstractTask&lt;OTHomeProvisioningTaskOperations, HomeDriver&gt; implements Task {</span>
+
+	/** Attribute that determine log. */
+<span class="fc" id="L35">	protected static final Logger LOGGER = Logger.getLogger(OTHomeprovisioningtask.class);</span>
+
+	@EJB
+	private HomeAdapter homeAdapter;
+
+	/**
+	 * Method responsible for obtaining singleton instance that manages the adapter.
+	 * 
+	 * @return the singleton adapter
+	 */
+	@Override
+	protected AbstractAdapter&lt;HomeDriver&gt; getSingletonAdapter() {
+<span class="fc" id="L47">		return homeAdapter;</span>
+	}
+
+	/**
+	 * Method responsible to create the request for SymphonicaWorkflowOrderTask
+	 * (NexusDriver) the incoming parameter.
+	 * 
+	 * @param taskType
+	 *            the task type is an object with a set of parameters with pair
+	 *            values.
+	 * @return the v.
+	 * @throws AdapterException
+	 *             exception controlled
+	 */
+	@Override
+	protected OTHomeProvisioningTaskOperations createRequest(final TaskRequestType taskType) throws AdapterException {
+<span class="fc" id="L63">		final String json = HomeAdapter.getParameterValue(HomeAdapterConstants.JSON, taskType);</span>
+<span class="fc" id="L64">		printParameterValue(HomeAdapterConstants.JSON, json);</span>
+<span class="fc" id="L65">		validateParameter(HomeAdapterConstants.JSON, json, AdapterValidationType.ALL, true);</span>
+
+<span class="fc" id="L67">		return new OTHomeProvisioningTaskOperations(json);</span>
+	}
+
+	/**
+	 * Method main responsible to execute OTHomeprovisioningtask task. This method
+	 * access method executeAccountDeleteTask ()
+	 * 
+	 * @throws AdapterException
+	 *             the adapter exception
+	 */
+	@Override
+	protected TaskResponseType executeDriverTask(HomeDriver driver) throws AdapterException {
+<span class="nc" id="L79">		return driver.executeDriver(request);</span>
+	}
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.1.201405082137</span></div></body></html>

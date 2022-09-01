@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>HomeAdapter.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">HomeAdapter</a> &gt; <a href="index.source.html" class="el_package">hn.com.tigo.josm.orchestrator.home.adapter.core</a> &gt; <span class="el_source">HomeAdapter.java</span></div><h1>HomeAdapter.java</h1><pre class="source lang-java linenums">package hn.com.tigo.josm.orchestrator.home.adapter.core;
+
+import static javax.ejb.ConcurrencyManagementType.BEAN;
+import javax.ejb.ConcurrencyManagement;
+import javax.ejb.DependsOn;
+import javax.ejb.Singleton;
+import javax.ejb.Startup;
+
+import org.apache.log4j.Logger;
+
+import hn.com.tigo.josm.common.adapter.AbstractAdapter;
+import hn.com.tigo.josm.common.adapter.config.AdapterConfig;
+import hn.com.tigo.josm.common.exceptions.AdapterException;
+import hn.com.tigo.josm.orchestrator.driver.home.core.HomeDriver;
+import hn.com.tigo.josm.orchestrator.home.adapter.utils.HomeAdapterConstants;
+
+/**
+ * The Class ApiHomeConstantsDriver this class gets the configuration from the configuration file.
+ * 
+ * @author Laurent G. Cáceres
+ * @version 1.0.0
+ * @since 10/08/2022
+ */
+@Singleton
+@Startup
+@DependsOn(&quot;MonitoringManager&quot;)
+@ConcurrencyManagement(BEAN)
+public class HomeAdapter extends AbstractAdapter&lt;HomeDriver&gt;{
+
+	
+	/** The Constant LOGGER.*/
+<span class="fc" id="L32">	private static final Logger LOGGER = Logger.getLogger(HomeAdapter.class);</span>
+
+	/**
+	 * Instantiates a new NexusAdapter and create a HomeAdapter Monitor
+	 * instance. Also Load the configuration and create the drivers.
+	 */
+<span class="fc" id="L38">	public HomeAdapter() {</span>
+<span class="fc" id="L39">		LOGGER.info(&quot;Init HomeAdapter Singleton&quot;);</span>
+<span class="fc" id="L40">	}</span>
+	
+	/* (non-Javadoc)
+	 * @see hn.com.tigo.josm.common.adapter.AbstractAdapter#createDriver()
+	 */
+	@Override
+	public HomeDriver createDriver() throws AdapterException {
+<span class="fc" id="L47">		final AdapterConfig config =  this.getConfigurationType();</span>
+<span class="fc" id="L48">		final String endpointHome = config.getDriverConfig().getConnections().get(&quot;homeCreator&quot;).getParameters().get(HomeAdapterConstants.URL);</span>
+	
+<span class="fc" id="L50">		return new HomeDriver(endpointHome);</span>
+	}
+	
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.1.201405082137</span></div></body></html>

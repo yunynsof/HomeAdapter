@@ -1,0 +1,6 @@
+projectKey=hn.com.tigo.josm:HomeAdapter
+serverUrl=http://localhost:9000
+serverVersion=7.0.0.36138
+dashboardUrl=http://localhost:9000/dashboard/index/hn.com.tigo.josm:HomeAdapter
+ceTaskId=AYL7DMdLeT7O9oP9wZFN
+ceTaskUrl=http://localhost:9000/api/ce/task?id=AYL7DMdLeT7O9oP9wZFN

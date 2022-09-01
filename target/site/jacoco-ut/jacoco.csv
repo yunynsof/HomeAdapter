@@ -1,0 +1,4 @@
+GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
+HomeAdapter,hn.com.tigo.josm.orchestrator.home.adapter.task,OTHomeprovisioningtask,6,29,0,0,1,7,1,4,1,4
+HomeAdapter,hn.com.tigo.josm.orchestrator.home.adapter.core,HomeAdapter,0,29,0,0,0,7,0,3,0,3
+HomeAdapter,hn.com.tigo.josm.orchestrator.home.adapter.utils,HomeAdapterConstants,3,0,0,0,2,0,1,0,1,0
